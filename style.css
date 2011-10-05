@@ -1,0 +1,51 @@
+body
+{
+	margin: 0;
+	padding: 0;
+	font-size: 12px;
+	background-color: #EFECCA;
+}
+
+table
+{
+	width: 700px;
+	margin: 0 auto;
+	border-collapse: collapse;
+	font-size: 12px;
+}
+
+td
+{
+	text-align: center;
+	padding: 2px;
+}
+
+#Site
+{
+	margin: 0px auto; 
+}
+
+#header
+{
+	margin: 0 0 10px 0; 
+	padding: 10px;
+	text-align: center;
+	background-color: #A7A37E;
+	height: 20px;
+}
+
+#inscription
+{
+	width: 600px;
+	padding: 2px;
+	border: 1px solid black;
+}
+
+#footer
+{
+	border: 1px solid black;
+	padding: 10px;
+	margin: 10px 0 0 0;
+	text-align: center;
+	background-color: #A7A37E;
+}
