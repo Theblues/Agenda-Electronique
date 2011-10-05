@@ -53,13 +53,13 @@
 					
 				}
 				else
-					echo '<span style="font-size:15x; text-align: center;"><p>Mot de passe trop petit</p></span>';
+					echo erreur('mdpcourt');
 			}
 			else
-				echo '<span style="font-size:15px; text-align: center;"><p>Les deux mots de passe sont différents</p></span>';
+				echo erreur('verif');
 		}
 		else
-			echo '<span style="font-size:15px; text-align: center;"><p>Veuillez entrer toutes les informations</p></span>';
+			erreur('pasrempli');
 	}
 	pied()
 ?>
