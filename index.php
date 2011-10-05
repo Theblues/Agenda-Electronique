@@ -13,7 +13,7 @@
 						<td> Mot de passe </td>
 						<td> <input type="password" name="password"> </td>
 						<td> <input type="submit" value="Connexion"> </td>
-						<td> <a href="inscription.php"> Inscription </td>
+						<td> <span style="font-size:10px;"> <a href="inscription.php"> Inscription </span></td>
 					</tr>
 				</table>
 			</form>				

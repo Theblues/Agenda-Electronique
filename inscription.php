@@ -6,7 +6,7 @@
 		
 		
 		<div id="Inscription">
-			<span style="font-size:25px; text-align: center;"><p>Veuillez vous inscrire</p></h2></span>
+			<span style="font-size:20px; text-align: center;"><p>Veuillez vous inscrire</p></h2></span>
 			<form method="post" action="inscription.php">
 				<table>
 					<tbody><tr>
