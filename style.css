@@ -44,9 +44,10 @@ td
 
 #erreur
 {
-	margin: 0 auto;
+	margin: 10 auto;
 	width: 250px;
-	padding: 2px;
+	padding: 0px;
+	text-align: center;
 }
 
 #footer
