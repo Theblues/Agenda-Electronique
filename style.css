@@ -20,6 +20,21 @@ td
 	padding: 2px;
 }
 
+.Connection
+{
+	width: 900px;
+	margin: 0 auto;
+	border-collapse: collapse;
+	font-size: 12px;
+}
+
+.Connection td
+{
+	text-align: center;
+	padding: 2px;
+	width: 200px;
+}
+
 #Site
 {
 	margin: 0px auto; 
