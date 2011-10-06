@@ -8,7 +8,7 @@ body
 
 table
 {
-	width: 700px;
+	width: 600px;
 	margin: 0 auto;
 	border-collapse: collapse;
 	font-size: 12px;
@@ -36,14 +36,17 @@ td
 
 #inscription
 {
-	width: 600px;
-	padding: 2px;
+	margin: 0 auto;
+	padding : 0;
+	width: 600px; 
 	border: 1px solid black;
 }
 
 #erreur
 {
-
+	margin: 0 auto;
+	width: 600px;
+	padding: 2px;
 }
 
 #footer
