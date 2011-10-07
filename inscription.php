@@ -3,10 +3,21 @@
 	
 	enTete("Inscription");
 	?>
-		
+		<div id="Lien">
+			<table>
+				<div class="menu">
+					<ul>
+						<li><a href="index.php">	Accueil </a></li>
+						<li><a href="#">			test </a></li>
+						<li><a href="#">			test </a></li>
+						<li><a href="#">			test </a></li>
+					</ul>
+				</div>
+			</table>
+		</div>
 		
 		<div id="Inscription">
-			<span style="font-size:20px; text-align: center;"><p>Veuillez vous inscrire</p></h2></span>
+			<span style="font-size:25px; text-align: center;"><p>Veuillez vous inscrire</p></h2></span>
 			<form method="post" action="inscription.php">
 				<table>
 					<tbody><tr>
