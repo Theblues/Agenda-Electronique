@@ -2,7 +2,7 @@ body
 {
 	margin: 0;
 	padding: 0;
-	font-size: 12px;
+	font-size: 15px;
 	background-color: #EFECCA;
 }
 
@@ -11,7 +11,7 @@ table
 	width: 500px;
 	margin: 0 auto;
 	border-collapse: collapse;
-	font-size: 12px;
+	font-size: 15px;
 }
 
 td
@@ -62,38 +62,40 @@ td
 	height: 20px;
 }
 
-#calendrier li
+#calendrier
 {
-	list-style: none;	
+    margin: 10px auto;
+    height: 400px;
 }
 
-#libelle 
+.libelle 
 {
-	width: 210px;
-	margin: 0 auto;
-	padding: 0;
-}
-.ligne {
-	width: 210px;
-	margin: 0 auto;
-	padding: 0;
-} 
-#libelle li 
-{
-	float : left;
-	width : 30px; 
-}
-.ligne li 
-{
-	color: #000;
-	float : left; 
-	width : 30px; 
+	width: 400px;
+	margin: 15px auto;
+	padding: 2px;
+        font-size: 20px;
 }
 
-.ligne li a:hover
+.libelle table
 {
-	list-style: none;
-	text-decoration: none;
+        width: 400px;
+	margin: 0 auto;
+	border-collapse: collapse;
+}
+
+.libelle td
+{
+        border: 1px solid black;
+	text-align: center;
+        empty-cells: show;
+	padding: 2px;
+}
+.ligne 
+{
+	width: 400px;
+	margin: 0 auto;
+	padding: 0;
+        font-size: 20px;
 }
 
 li.itemCurrentItem 
@@ -103,7 +105,7 @@ li.itemCurrentItem
 li.itemSelectedItem 
 {
 	/* A vous de configurer l'apparence du jour sélectionné */
-}		
+}	
 
 #inscription
 {
@@ -115,7 +117,7 @@ li.itemSelectedItem
 
 #erreur
 {
-	margin: 10 auto;
+	margin: 10px auto;
 	width: 500px;
 	padding: 0px;
 	text-align: center;
