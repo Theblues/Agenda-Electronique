@@ -1,76 +1,88 @@
 <?php
-	include "ajout.inc.php";
-	
-	enTete("Inscription");
-	?>
-		<div id="Lien">
-			<table>
-				<div class="menu">
-					<ul>
-						<li><a href="index.php">	Accueil </a></li>
-						<li><a href="#">			test </a></li>
-						<li><a href="#">			test </a></li>
-						<li><a href="#">			test </a></li>
-					</ul>
-				</div>
-			</table>
-		</div>
-		
-		<div id="Inscription">
-			<span style="font-size:25px; text-align: center;"><p>Veuillez vous inscrire</p></h2></span>
-			<form method="post" action="inscription.php">
-				<table>
-					<tbody><tr>
-						<td>Login</td>
-						<td><input type="text" name="login"></td>
-					</tr>
-					<tr>
-						<td>Choisir un mot de passe</td>
-						<td><input type="password" name="password"></td>
-					</tr>
-					<tr>
-						<td>Verification mot de passe</td>
-						<td><input type="password" name="validation"></td>
-					</tr>
-					<tr>
-						<td> Email </td>
-						<td><input type="text" name="email"></td>
-					</tr>
-					<tr>
-						<td></td>
-						<td> <input type="reset" value="Effacer"><input type="submit" value="OK" style="margin-left:30px;"></td>
-					</tr>
-					</tbody>
-				</table>
-			</form>
-		</div>
-		
-<?php
+session_start();
 
-	if (isset($_POST['login']) && isset($_POST['password']) && isset($_POST['validation']) && isset($_POST['email']) )
-	{
-		if (!empty($_POST['login']) && !empty($_POST['password']) && !empty($_POST['validation']) && !empty($_POST['email']) )
-		{
-			$login = $_POST['login'];
-			$password = $_POST['password'];
-			$validation = $_POST['validation'];
-			$email = $_POST['email'];
-			
-			if ($password == $validation)
-			{
-				$taillepassword = strlen($password);
-				if ($taillepassword > 4)
-				{
-					
-				}
-				else
-					echo erreur('mdpcourt');
-			}
-			else
-				echo erreur('verif');
-		}
-		else
-			erreur('pasrempli');
-	}
-	pied()
+include 'interactionDB.inc.php';
+include 'validation.inc.php';
+include 'core.inc.php';
+
+head();
+insererImage();
+?>
+</div></div>
+<div class="inscription-main content">
+    <div class="production-info agenda">
+        <h3> <strong>Créer un compte </strong></h3>
+        <p> Votre compte donne au servive Agenda. Si vous disposez déjà d'un compte, vous pouvez <a href="index.php"> vous connecter ici.</a></p>
+    </div>
+    <div class="formulaire">
+        <h2> Premier pas avec Agenda </h2>
+        <form id="inscription" method="post" action="inscription.php">
+            <table>
+                <tbody>
+                    <tr>
+                        <td> Prénom :</td> 
+                        <td> <input id="Prenom" type="text" value="" name="prenom">
+                    </tr>
+                <td> Nom :</td>
+                <td> <input id="Nom" type="text" value="" name="nom">
+                    </tr>
+                <tr>
+                    <td> Email:</td>
+                    <td> <input id="Email" type="text" value="" name="email"></td>
+                </tr>
+                <tr>
+                    <td> Choisissez un mot de passe : </td>
+                    <td> <input id="Password" type = "password" name="password"> </td>
+                </tr>
+                <tr>
+                    <td> Confirmez le mot de passe : </td>
+                    <td> <input id="VerifPassword" type="password" name="verifpassword"> </td>
+                </tr>
+                <tr>
+                    <td> <input id="CreerCompte" type="submit" value="Créer un compte" name="ok"></td>
+                </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+</div>
+
+<?php
+if (isset($_POST['prenom']) && isset($_POST['nom']) && isset($_POST['email']) && isset($_POST['password']) && isset($_POST['verifpassword']))
+{
+    if (empty($_POST['prenom']) || empty($_POST['nom']) || empty($_POST['email']) || empty($_POST['password']) || empty($_POST['verifpassword']))
+        div_special('pasrempli');
+    else
+    {
+        $prenom = htmlentities($_POST['prenom']);
+        $nom = htmlentities($_POST['nom']);
+        $email = htmlentities($_POST['email']);
+        $password = htmlentities($_POST['password']);
+        $verifpassword = htmlentities($_POST['verifpassword']);
+
+
+        if ($password != $verifpassword)
+            div_special('verif');
+        else if (!validationNom($nom))
+            div_special('nomfaux');
+        else if (!validationPrenom($prenom))
+            div_special('prenomfaux');
+        else if (!validationPassword($password))
+            div_special('longmdp');
+        else if (!verifierAdresseMail($email))
+            div_special('emailfaux');
+        else if (strlen($email) > 32)
+            div_special('emaillong');
+        else if (verificationPersonne($nom, $prenom))
+            div_special('personneUsed');
+        else if (verificationEmail($email))
+            div_special('emailUsed');
+        else
+        {
+            inscription($nom, $prenom, $email, $password);
+            div_special('inscription');
+        }
+    }
+}
+footer();
 ?>
