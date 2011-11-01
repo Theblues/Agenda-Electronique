@@ -14,4 +14,5 @@ else
     include("accueil.php");
 
 footer();
+
 ?>

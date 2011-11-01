@@ -315,6 +315,7 @@ html, body {
 
 table
 {
+<<<<<<< HEAD
     margin: 0px auto;
     width: 600px;
     border-collapse: collapse;
@@ -747,6 +748,7 @@ li.dateEvenement
 
 .profiltab, .ajoutContact
 {
+<<<<<<< HEAD
     padding-top: 23px;
     padding-bottom: 30px;
 }
