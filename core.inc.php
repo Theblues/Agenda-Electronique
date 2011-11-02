@@ -3,7 +3,7 @@
 function head()
 {
     echo '<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">';
-    echo ' <html><head><title>Agenda</title><link rel="stylesheet" type="text/css" href="style.css"></head><body>';
+    echo ' <html><head><title>Agenda</title><link rel="stylesheet" type="text/css" href="css/style.css"></head><body>';
     echo ' <div class="site"> <div class="agenda-header"> <div class="header content">';
 }
 
