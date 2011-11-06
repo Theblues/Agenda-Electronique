@@ -9,8 +9,8 @@ function connectionDB()
     try
     {
         $pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
-        $db = new PDO('mysql:host=localhost;dbname=CPL', 'root', '', $pdo_options);
-        //$db = new PDO('pgsql:host=woody;dbname=le100700', 'le100700', 'CPL', $pdo_options);
+        //$db = new PDO('mysql:host=localhost;dbname=CPL', 'root', '', $pdo_options);
+        $db = new PDO('pgsql:host=woody;dbname=le100700', 'le100700', 'CPL', $pdo_options);
     }
     catch (Exception $e)
     {
@@ -116,7 +116,7 @@ function dejaContact($id_users, $id_contact)
 {
     $db = connectionDB();
     
-    $request = $db->prepare('SELECT * FROM utilisateurscontact WHERE  id_users = :id_users AND id_contact = :id_contact');
+    $request = $db->prepare('SELECT * FROM contact WHERE  id_users = :id_users AND id_contact = :id_contact');
     $request->execute(array(':id_users' => $id_users, ':id_contact' => $id_contact));
     $result = $request->fetch(PDO::FETCH_ASSOC);
     
@@ -138,7 +138,7 @@ function ajouterContact($id_users, $id_contact)
 {
     $db = connectionDB();
     
-    $request = $db->prepare('INSERT INTO utilisateurscontact VALUES (:id_users, :id_contact)');
+    $request = $db->prepare('INSERT INTO contact VALUES (:id_users, :id_contact)');
     $request->execute(array(':id_users' => $id_users, ':id_contact' => $id_contact));
 }
 
@@ -146,7 +146,7 @@ function nbContact($id_users)
 {
     $db = connectionDB();
     
-    $request = $db->prepare('SELECT count(*) AS i FROM utilisateurscontact WHERE id_users=:id_users');
+    $request = $db->prepare('SELECT count(*) AS i FROM contact WHERE id_users=:id_users');
     $request->execute(array(':id_users' => $id_users));
     $nbContact = $request->fetch(PDO::FETCH_ASSOC);
     
@@ -197,12 +197,13 @@ function getEvenementUsers($id_users)
 {
     $db = connectionDB();
     
-    $request = $db->prepare('SELECT titre, dateEvenement, lieu, dureeEvenement, description
+    $request = $db->prepare('SELECT id_evenement, titre, dateEvenement, lieu, dureeEvenement, description
                                             FROM evenement
                                             WHERE id_users = :id_users
                                             ORDER BY dateEvenement');
     $request->execute(array(':id_users' => $id_users));
     $res = $request->fetchAll();
+
     return $res;
 }
 
@@ -211,17 +212,42 @@ function getNombreEvenementUsers($id_users)
     $db = connectionDB();
     
     $request = $db->prepare('SELECT count(*) AS i FROM evenement
-                                              WHERE id_users = :id_users ORDER BY dateEvenement');
+                                              WHERE id_users = :id_users');
     $request->execute(array(':id_users' => $id_users));
     $res = $request->fetch(PDO::FETCH_ASSOC);
     
     return $res['i'];
 }
 
-function supprimerEvenement($id_users, $date, $titre)
+function supprimerEvenement($id_evenement)
 {
      $db = connectionDB();
-     $request = $db->prepare('DELETE FROM evenement WHERE id_users = :id_users AND dateEvenement = :date AND titre = :titre');
-     $request->execute(array(':id_users' => $id_users, ':date' => $date, ':titre' => $titre));
+     $request = $db->prepare('DELETE FROM evenement WHERE id_evenement = :id_evenement');
+     $request->execute(array(':id_evenement' => $id_evenement));
+}
+
+function getContact($id_users)
+{
+    $db = connectionDB();
+    $request = $db->prepare('SELECT id_contact FROM contact WHERE id_users = :id_users');
+    $request->execute(array(':id_users' => $id_users));
+    $result = $request->fetchAll();
+
+    $i = 0;
+    foreach ($result AS $attribut => $valeur)
+    {
+        foreach ($valeur as $att => $val)
+        {
+            if ($att == 'id_contact')
+            {
+                $id_contact = $val;
+                $request = $db->prepare('SELECT nom, prenom,  email FROM accounts where id = :id_users');
+                $request->execute(array(':id_users' =>$id_contact));
+                $personne[$i] = $request->fetch(PDO::FETCH_ASSOC);
+            }
+        }
+        $i++;
+    }
+    return $personne;
 }
 ?>

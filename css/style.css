@@ -97,12 +97,11 @@ html, body {
 
 .agenda-footer2
 {
-    position: relative;
+    position: fixed;
     bottom: 0;
     height: 35px;
     width: 100%;
     border-top: 1px solid #ebebeb;
-    overflow: hidden;
 }
 
 .footer 
@@ -315,7 +314,6 @@ html, body {
 
 table
 {
-<<<<<<< HEAD
     margin: 0px auto;
     width: 600px;
     border-collapse: collapse;
@@ -748,7 +746,6 @@ li.dateEvenement
 
 .profiltab, .ajoutContact
 {
-<<<<<<< HEAD
     padding-top: 23px;
     padding-bottom: 30px;
 }
@@ -901,4 +898,47 @@ table.mois
 .listeEvenement li
 {
     margin: 0 0 5px 10px;
+}
+
+/*******************************/
+/**         CONTACT.PHP             **/
+/*******************************/
+
+.listeContact 
+{
+    margin: 20px 0 50px -200px;
+    font-family: Arial-black;
+}
+
+.listeContact table
+{
+    font-size: 18px;
+}
+
+.listeContact td.caract
+{
+    color: #A64A2E;
+}
+
+.listeContact td
+{
+    width: 200px;
+    height: 27px;
+    border: ridge 2px #CC6C2A;
+}
+
+.listeContact a
+{
+    text-decoration: none;
+    color:#000;
+}
+
+.listeContact a:visited, .listeContact a:link
+{
+    color: #00BBC1;
+}
+
+.listeContact a:hover
+{
+    text-decoration: underline;
 }

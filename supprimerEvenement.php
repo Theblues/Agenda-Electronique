@@ -1,13 +1,9 @@
 <?php
-session_start();
 
 include 'interactionDB.inc.php';
 
-$id_users = $_SESSION['id'];
+$id_evenement = $_GET['id_evenement'];
 
-$date = $_GET['dateEvenement'];
-$titre = $_GET['titreEvenement'];
-
-supprimerEvenement($id_users, $date, $titre);
+supprimerEvenement($id_evenement);
 header("Location:profil.php");
 ?>

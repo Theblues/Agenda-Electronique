@@ -23,9 +23,16 @@ function userbox()
     echo '<div class="userbox">    <div class="name">';
         $prenom = $_SESSION['prenom'];
         echo "<a class=\"name\" href=\"profil.php\">$prenom</a>";
-  echo'  </div><ul class="usernav"><li> <a href="contact.php"> Contact </a></li><li><a href="ajoutContact.php"> Ajouter contact </a><li><a href=#> Rechercher contact </a></li><li><a href="#"> Messagerie </a></li>
-            <li><a href="compte.php"> Gestion du compte </a></li><li><a href="deconnexion.php"> Deconnexion </a></li>
-        </ul></div></div></div>';
+  echo'  </div>
+		<ul class="usernav">
+			<li> <a href="contact.php"> Contact </a></li>
+			<li><a href="ajoutContact.php"> Ajouter contact </a>
+			<li><a href=#> Recherche </a></li>
+			<li><a href="#"> Messagerie </a></li>
+			<li><a href="compte.php"> Gestion du compte </a></li>
+			<li><a href="deconnexion.php"> Deconnexion </a></li>
+        	</ul>
+	</div></div></div>';
 }
 
 function footer()
