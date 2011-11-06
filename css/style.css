@@ -443,7 +443,7 @@ ul.usernav li
     display:inline;
     margin:0;
     padding:0 8px 0 9px;
-    background:url('images/nav-rule.png') 0 50% no-repeat;
+    background:url('../images/nav-rule.png') 0 50% no-repeat;
 }
 ul.usernav li a
 {
@@ -479,7 +479,7 @@ ul.tableau li a
 
 .pagehead ul.tableau 
 {
-    background: url("images/bar_background.png") repeat-x scroll 0 0 transparent;
+    background: url("../images/bar_background.png") repeat-x scroll 0 0 transparent;
     border-color: #EAEAEA #EAEAEA #CACACA;
     border-style: solid;
     border-width: 1px;
@@ -521,7 +521,7 @@ ul.tableau li a
 
 .pagehead ul.tableau li a:hover
 {
-    color:#4183c4;background:url('images/hover.png') 0 0 repeat-x;
+    color:#4183c4;background:url('../images/hover.png') 0 0 repeat-x;
 }
 
 
