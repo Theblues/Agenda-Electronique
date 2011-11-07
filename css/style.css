@@ -906,13 +906,14 @@ table.mois
 
 .listeContact 
 {
-    margin: 20px 0 50px -200px;
-    font-family: Arial-black;
+    margin: 10px 0 auto;
 }
 
-.listeContact table
+table.listeContact
 {
-    font-size: 18px;
+    font-size: 19px;
+    margin: 20px 0 50px -200px;
+    font-family: Arial-black;
 }
 
 .listeContact td.caract

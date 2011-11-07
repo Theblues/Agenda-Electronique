@@ -10,10 +10,20 @@ if (!$_SESSION)
     exit();
 }
 
-$id_users = $_SESSION['id'];
-$nom_users = $_SESSION['nom'];
-$prenom_users = $_SESSION['prenom'];
-$email_users = $_SESSION['email'];
+$id_user = $_SESSION['id'];
+$nom_user = $_SESSION['nom'];
+$prenom_user = $_SESSION['prenom'];
+$email_user = $_SESSION['email'];
+
+if (isset($_GET['nom']) && isset($_GET['prenom']))
+{
+    $info_user = infoCompteviaPersonne($_GET['nom'], $_GET['prenom']);
+    $id_user = $info_user['id'];
+    $nom_user = $_GET['nom'];
+    $prenom_user = $_GET['prenom'];
+    $email_user = $info_user['email'];
+    $is_contact = true;
+}
 
 head();
 insererImage();
@@ -26,6 +36,13 @@ userbox();
     </div>
     <div class="presentation">
         <div class="listeContact">
+            <?php
+            $listeContact = getContact($id_user);
+            if (sizeof($listeContact) == 0)
+                echo "$prenom_user $nom_user n'a aucun contact.";
+            else
+            {
+              ?>
             <table>
                 <tbody>           
                     <tr>
@@ -33,7 +50,6 @@ userbox();
                         <td class='caract'> Email du contact </td>
                     </tr>
                     <?php
-                    $listeContact = getContact($id_users);
                     foreach ($listeContact as $attribut => $valeur)
                     {
                         foreach ($valeur as $att => $val)
@@ -54,6 +70,9 @@ userbox();
                     ?>
                 </tbody>
             </table>
+            <?php 
+            }
+            ?>
         </div>
     </div>
 </div>
