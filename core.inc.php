@@ -3,7 +3,8 @@
 function head()
 {
     echo '<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">';
-    echo ' <html><head><title>Agenda</title><link rel="stylesheet" type="text/css" href="css/style.css"></head><body>';
+    echo ' <html><head><title>Agenda</title><link rel="stylesheet" type="text/css" href="css/style.css">';
+    echo '</head><body>';
     echo ' <div class="site"> <div class="agenda-header"> <div class="header content">';
 }
 
@@ -27,13 +28,24 @@ function userbox()
 		<ul class="usernav">
 			<li> <a href="contact.php"> Contact </a></li>
 			<li><a href="ajoutContact.php"> Ajouter contact </a>
-			<li><a href=#> Recherche </a></li>
 			<li><a href="#"> Messagerie </a></li>
 			<li><a href="compte.php"> Gestion du compte </a></li>
 			<li><a href="deconnexion.php"> Deconnexion </a></li>
         	</ul>
-	</div></div></div>';
+	</div></div>';
+        
+        recherche();
+    echo'</div>';
 }
+
+ function recherche()
+ {
+     echo '<div class="recherche">
+                    <form id="recherche" method="get" action="recherche.php">
+                        <input type="text" name="search" value="" size="15" value="" placeholder="Rechercher..." />
+                    </form>
+               </div>';
+ }
 
 function footer()
 {
@@ -43,6 +55,12 @@ function footer()
 function footerMobile()
 {
     echo ' <div class="agenda-footer2"><div class="footer content"> &copy 2011 Erwan et <span style="text-decoration:line-through;">Ridhoini</span></div></div> </div></body></html>';
+}
+
+function redirect($url)
+{
+    header("Location: $url");
+    exit();
 }
 
 function div_special($texte)

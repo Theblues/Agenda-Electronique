@@ -112,12 +112,12 @@ function verifAncienPassword($id, $password)
     return false;
 }
 
-function dejaContact($id_users, $id_contact)
+function dejaContact($id_user, $id_contact)
 {
     $db = connectionDB();
     
     $request = $db->prepare('SELECT * FROM contact WHERE  id_users = :id_users AND id_contact = :id_contact');
-    $request->execute(array(':id_users' => $id_users, ':id_contact' => $id_contact));
+    $request->execute(array(':id_users' => $id_user, ':id_contact' => $id_contact));
     $result = $request->fetch(PDO::FETCH_ASSOC);
     
     if ($result)
@@ -134,20 +134,20 @@ function inscription($nom, $prenom, $email, $password)
     $request->execute(array(':nom' => $nom, ':prenom' => $prenom, ':email' => $email, ':password' => $password));
 }
 
-function ajouterContact($id_users, $id_contact)
+function ajouterContact($id_user, $id_contact)
 {
     $db = connectionDB();
     
     $request = $db->prepare('INSERT INTO contact VALUES (:id_users, :id_contact)');
-    $request->execute(array(':id_users' => $id_users, ':id_contact' => $id_contact));
+    $request->execute(array(':id_users' => $id_user, ':id_contact' => $id_contact));
 }
 
-function nbContact($id_users)
+function nbContact($id_user)
 {
     $db = connectionDB();
     
     $request = $db->prepare('SELECT count(*) AS i FROM contact WHERE id_users=:id_users');
-    $request->execute(array(':id_users' => $id_users));
+    $request->execute(array(':id_users' => $id_user));
     $nbContact = $request->fetch(PDO::FETCH_ASSOC);
     
     return $nbContact;
@@ -160,23 +160,23 @@ function modifierCompte($entree, $valeur, $id)
      $request = $db->prepare("UPDATE accounts SET $entree = :valeur WHERE id =:id;");
      $request->execute(array(':valeur' => $valeur, ':id' => $id));
 }
-function listeEvenementJour($id_users, $date)
+function listeEvenementJour($id_user, $date)
 {
     $db = connectionDB();
     $request = $db->prepare('SELECT titre, lieu, dureeEvenement, description FROM evenement WHERE id_users = :id AND dateEvenement = :dateEvenement');
-   $request->execute(array(':id' => $id_users, ':dateEvenement' => $date));
+   $request->execute(array(':id' => $id_user, ':dateEvenement' => $date));
 
    $resultat = $request->fetchAll();
   
    return $resultat;
 }
 
-function evenementValide($id_users, $date, $titre)
+function evenementValide($id_user, $date, $titre)
 {
     $db = connectionDB();
 
     $request = $db->prepare('SELECT * FROM evenement WHERE id_users = :id_users AND dateEvenement = :date AND titre = :titre');
-    $request->execute(array(':id_users' => $id_users, ':date' => $date, ':titre' => $titre));
+    $request->execute(array(':id_users' => $id_user, ':date' => $date, ':titre' => $titre));
     $res = $request->fetch(PDO::FETCH_ASSOC);
     
     if ($res)
@@ -185,15 +185,15 @@ function evenementValide($id_users, $date, $titre)
     return true;
 }
 
-function ajouterEvenement($id_users, $date, $titre, $lieu, $duree, $description)
+function ajouterEvenement($id_user, $date, $titre, $lieu, $duree, $description)
 {
     $db = connectionDB();
     
     $request = $db->prepare('INSERT INTO evenement(id_users, titre, dateEvenement, lieu, dureeEvenement, description) VALUES (:id_users, :titre, :date, :lieu, :duree, :description)');
-    $request->execute(array(':id_users' => $id_users, ':titre' => $titre, ':date' => $date, ':lieu' => $lieu, ':duree' => $duree, 'description' => $description));
+    $request->execute(array(':id_users' => $id_user, ':titre' => $titre, ':date' => $date, ':lieu' => $lieu, ':duree' => $duree, 'description' => $description));
 }
 
-function getEvenementUsers($id_users)
+function getEvenementUsers($id_user)
 {
     $db = connectionDB();
     
@@ -201,19 +201,19 @@ function getEvenementUsers($id_users)
                                             FROM evenement
                                             WHERE id_users = :id_users
                                             ORDER BY dateEvenement');
-    $request->execute(array(':id_users' => $id_users));
-    $res = $request->fetchAll();
+    $request->execute(array(':id_users' => $id_user));
+    $res = $request->fetchAll(PDO::FETCH_ASSOC);
 
     return $res;
 }
 
-function getNombreEvenementUsers($id_users)
+function getNombreEvenementUsers($id_user)
 {
     $db = connectionDB();
     
     $request = $db->prepare('SELECT count(*) AS i FROM evenement
                                               WHERE id_users = :id_users');
-    $request->execute(array(':id_users' => $id_users));
+    $request->execute(array(':id_users' => $id_user));
     $res = $request->fetch(PDO::FETCH_ASSOC);
     
     return $res['i'];
@@ -226,11 +226,11 @@ function supprimerEvenement($id_evenement)
      $request->execute(array(':id_evenement' => $id_evenement));
 }
 
-function getContact($id_users)
+function getContact($id_user)
 {
     $db = connectionDB();
     $request = $db->prepare('SELECT id_contact FROM contact WHERE id_users = :id_users');
-    $request->execute(array(':id_users' => $id_users));
+    $request->execute(array(':id_users' => $id_user));
     $result = $request->fetchAll();
 
     $i = 0;

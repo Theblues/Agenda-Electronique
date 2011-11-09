@@ -24,11 +24,9 @@ if (isset($_GET['nom']) && isset($_GET['prenom']))
     $nom_user = $_GET['nom'];
     $prenom_user = $_GET['prenom'];
     $email_user = $info_user['email'];
-    $is_contact = !dejaContact($_SESSION['id'], $id_user);
+    $is_contact = dejaContact($_SESSION['id'], $id_user);
     $is_vous = false;
 }
-
-echo $is_contact;
 
 head();
 insererImage();
@@ -54,7 +52,7 @@ userbox();
             ?>
         </h1>
         <?php
-            if ($is_vous)
+            if ($is_vous == true)
             {
                 echo '<ul class="profil">
                             <li class="texteProfil">
@@ -66,7 +64,7 @@ userbox();
                         </ul>
                     </div>';
             }
-            elseif($is_contact == 'false')
+            elseif($is_contact == false)
             {
                 echo '<ul class="profil">
                             <li class="texteProfil">
@@ -91,14 +89,14 @@ userbox();
             $nbContact = nbContact($id_user);
             if (isset($nbContact))
             {
-                if ($is_contact == 'false')
+                if ($is_contact == false)
                     echo "<ul class='nbContact'><li class='chiffre'><a href=\"contact.php\">" . $nbContact['i'] . "</a></li>";
                 else
                     echo "<ul class='nbContact'><li class='chiffre'><a href=\"contact.php?nom=$nom_user&prenom=$prenom_user\">" . $nbContact['i'] . "</a></li>";
             }
             else
             {
-                if ($is_contact == 'false')
+                if ($is_contact == false)
                     echo "<ul class='nbContact'><li class='chiffre'><a href=\"contact.php\">0</a></li>";
                 else
                     echo "<ul class='nbContact'><li class='chiffre'><a href=\"contact.php?nom=$nom_user&prenom=$prenom_user\">0</a></li>";
@@ -109,21 +107,29 @@ userbox();
         <hr />
         <div class="listeEvenementProfil">
             <?php
-            if( $is_contact == 'true')
+            if( $is_contact == true || $is_vous == true)
             {
-                echo "<div class='texteEvenement'><p>Liste de vos évenements</p> </div>";
+                if ($is_vous == true)
+                    echo "<div class='texteEvenement'><p>Liste de vos évenements</p> </div>";
+                else 
+                    echo "<div class='texteEvenement'><p>Liste des évenements de $nom_user $prenom_user</p> </div>";
                 $ancienneDate = 0;
                 $listeEnvenement = getEvenementUsers($id_user);
                 $nbEnvenement = getNombreEvenementUsers($id_user);
                 if ($nbEnvenement == 0)
-                    echo 'Vous avez aucun evenement';
+                {
+                    if ($is_vous == true)
+                    echo 'Vous n\'avez aucun evenement';
+                else 
+                    echo "$nom_user $prenom_userecho n'a aucun évenement";
+                }
                 else
                 {
                     echo "<span class='partie1'><ul>";
                     $iSpan = intval($nbEnvenement / 2);
                     $span = false;
                     $i = 0;
-
+                    
                     foreach ($listeEnvenement as $attribut => $valeur)
                     {
                         foreach ($valeur as $att => $val)
@@ -132,11 +138,11 @@ userbox();
                                 $id_evenement = $val;
                             if ($att == 'titre')
                                 $titre = $val;
-                            if ($att == 'dateEvenement')
+                            if ($att == 'dateevenement')
                                 $date = $val;
                             if ($att == 'lieu')
                                 $lieu = $val;
-                            if ($att == 'dureeEvenement')
+                            if ($att == 'dureevenement')
                                 $dureeEvenement = $val;
                             if ($att == 'description')
                                 $description = $val;
@@ -159,7 +165,10 @@ userbox();
                         echo "<li class='titreEvenement'><span style='color:red;'>Titre</span> : $titre";
                         if (isset($dureeEvenement))
                             echo "($dureeEvenement min)";
-                        echo "<span class='croix'><a href='supprimerEvenement.php?id_evenement=$id_evenement'><img class=\"a-logo\" src=\"images/delete.gif\"></a></span>";
+                        if ($is_vous == true)
+                            echo "<span class='croix'><a href='supprimerEvenement.php?id_evenement=$id_evenement'><img class=\"a-logo\" src=\"images/delete.gif\"></a></span>";
+                        else
+                            echo "<span class='croix'><a href='supprimerEvenement.php?id_evenement=$id_evenement&nom=$nom_user&prenom=$prenom_user'><img class=\"a-logo\" src=\"images/delete.gif\"></a></span>";
                         echo "</li>";
                         if (isset($lieu))
                             echo "<li class='attributEvenement'><span style='color:#FFAB48;'>Lieu</span> : $lieu</li>";
@@ -172,6 +181,8 @@ userbox();
                     echo '</ul></span>';
                 }
             }
+            else
+                echo "<div class='texteEvenement'><p>Vous devez l'avoir dans vos contacts pour voir ses évenements !</p> </div>";
             ?>
         </div>
     </div>
