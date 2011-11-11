@@ -31,4 +31,5 @@ if (isset($_POST['email']) && isset($_POST['passwd']))
     else
         header("Location:index.php?id=fail");
 }
+header("Location:index.php");
 ?>

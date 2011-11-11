@@ -2,8 +2,12 @@
 
 session_start();
 
+include 'core.inc.php';
 include 'interactionDB.inc.php';
 include 'validation.inc.php';
+
+if (!$_SESSION)
+	redirect("index.php");
 
 $id = $_SESSION['id'];
 $modifie = false;

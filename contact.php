@@ -5,10 +5,7 @@ include 'core.inc.php';
 include 'interactionDB.inc.php';
 
 if (!$_SESSION)
-{
-    header("Location:index.php");
-    exit();
-}
+    redirect("index.php");
 
 $id_user = $_SESSION['id'];
 $nom_user = $_SESSION['nom'];

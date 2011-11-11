@@ -5,6 +5,9 @@ include 'core.inc.php';
 include 'interactionDB.inc.php';
 include 'validation.inc.php';
 
+if (!$_SESSION)
+	redirect("index.php");
+
 $jour = $_GET['jour'];
 $moisNum = $_GET['mois'];
 $annee = $_GET['annee'];
