@@ -133,7 +133,12 @@ html, body {
     border: 2px outset lightblue;
 }
 
-
+.recherche
+{
+    position: absolute;
+    right: 155px;
+    top: 44px;
+}
 /*************************** CSS ACCUEIL ***************************/
 
 .header .inscription

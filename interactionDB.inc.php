@@ -250,4 +250,17 @@ function getContact($id_user)
     }
     return $personne;
 }
+
+function recherche_db($recherche)
+{
+    $db = connectionDB();
+    
+    $recherche = "%$recherche%";
+    $request = $db->prepare("SELECT id, nom, prenom, email FROM accounts 
+                                                WHERE (UPPER(nom) LIKE UPPER(:recherche) OR UPPER(prenom) LIKE UPPER(:recherche))");
+    $request->execute(array (':recherche' => $recherche));
+    $result = $request->fetchAll(PDO::FETCH_ASSOC);
+    
+    return $result;
+}
 ?>

@@ -41,11 +41,13 @@ userbox();
             {
               ?>
             <table>
-                <tbody>           
+                <thead>           
                     <tr>
-                        <td class='caract'> Nom du contact </td>
-                        <td class='caract'> Email du contact </td>
+                        <th> Nom du contact </th>
+                        <th> Email du contact</th>
                     </tr>
+                </thead>
+                <tbody>
                     <?php
                     foreach ($listeContact as $attribut => $valeur)
                     {

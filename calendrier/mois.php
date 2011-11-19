@@ -39,9 +39,9 @@ if ($debut < 0)
     $debut = 6;
 
 echo "<table class='mois'>
-                <tr><td class='mois' onclick='clickCase($jour, $moisPrecedentNum, $anneeduMoisPrecedent)'> << $moisPrecedentNom $anneeduMoisPrecedent</td>
+                <tr><td class='mois' onmouseover=\"this.style.background='red'\" onmouseout=\"this.style.background='#2E2D2D'\"onclick='clickCase($jour, $moisPrecedentNum, $anneeduMoisPrecedent)'> << $moisPrecedentNom $anneeduMoisPrecedent</td>
                     <td class='mois'> $moisNom $annee </td>
-                    <td class='mois' onclick='clickCase($jour, $moisProchainNum, $anneeduMoisProchain)'> $moisProchainNom $anneeduMoisProchain >></td>
+                    <td class='mois' onmouseover=\"this.style.background='red'\" onmouseout=\"this.style.background='#2E2D2D'\" onclick='clickCase($jour, $moisProchainNum, $anneeduMoisProchain)'> $moisProchainNom $anneeduMoisProchain >></td>
                  </tr>
           </table>
           <table><tr class='jours'><td>Lundi</td><td>Mardi</td><td>Mercredi</td><td>Jeudi</td><td>Vendredi</td><td>Samedi</td><td>Dimanche</td></tr>";
@@ -66,13 +66,13 @@ for ($i = 1; $i <= $nbJours; $i++)
         $k++;
     }
     if ($i == $jour)
-        echo "<td class='jour_selected' onclick='clickCase($i, $moisNum, $annee)'>$i</td>";
+        echo "<td class='jour_selected' onmouseover=\"this.style.background='red'\" onmouseout=\"this.style.background='#A7C9AE'\" onclick='clickCase($i, $moisNum, $annee)'>$i</td>";
     else if ($i == Date('d') && $moisNum == Date('m') && $annee == Date('Y'))
-        echo "<td class='jour_courant' onclick='clickCase($i, $moisNum, $annee)'>$i</td>";
+        echo "<td class='jour_courant' onmouseover=\"this.style.background='red'\" onmouseout=\"this.style.background='#BF5B00'\" onclick='clickCase($i, $moisNum, $annee)'>$i</td>";
     else if ($k % 2 == 1)
-        echo "<td class='beige_clair' onclick='clickCase($i, $moisNum, $annee)'>$i</td>";
+        echo "<td class='beige_clair' onmouseover=\"this.style.background='red'\" onmouseout=\"this.style.background='#FFEDB0'\" onclick='clickCase($i, $moisNum, $annee)'>$i</td>";
     else
-        echo "<td class='beige_fonce' onclick='clickCase($i,  $moisNum, $annee)'>$i</td>";
+        echo "<td class='beige_fonce' onmouseover=\"this.style.background='red'\" onmouseout=\"this.style.background='#D6A249'\" onclick='clickCase($i,  $moisNum, $annee)'>$i</td>";
 }
 // permet de remplir la couleur a la fin du tableau
 $i = $nbJours + $debut;

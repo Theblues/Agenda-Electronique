@@ -3,7 +3,7 @@
 function head()
 {
     echo '<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">';
-    echo ' <html><head><title>Agenda</title><link rel="stylesheet" type="text/css" href="css/style.css">';
+    echo '<html><head><title>Agenda</title><link rel="stylesheet" type="text/css" href="css/style.css">';
     echo '</head><body>';
     echo ' <div class="site"> <div class="agenda-header"> <div class="header content">';
 }
@@ -13,10 +13,8 @@ function insererImage()
     $jour = Date('d');
     $mois = Date('m');
     $annee = Date("Y");
-    if (isset($_SESSION))
-        echo "<a class=\"lien-agenda\" href=\"index.php?id=mois&jours=$jour&mois=$mois&annee=$annee\"><img class=\"a-logo\" src=\"images/agenda_text.gif\"></a>";
-    else
-        echo '<a class="lien-agenda" href="index.php"><img class="a-logo" src="images/agenda_text.gif"></a>';
+    echo "<a class=\"lien-agenda\" href=\"index.php?id=mois&jours=$jour&mois=$mois&annee=$annee\"><img class=\"a-logo\" src=\"images/agenda_text.gif\"></a>";
+
 }
 
 function userbox()
