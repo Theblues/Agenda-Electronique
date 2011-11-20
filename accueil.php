@@ -15,11 +15,11 @@
             <form method="post" action='connexion.php'>
                 <label>
                     <strong class="email-label"> Email </strong>
-                    <input id="Email" type="text" value="" name="email">
+                    <input id="Email" type="text" value="" name="email" required>
                 </label>
                 <label>
                     <strong class="password-label"> Mot de passe</strong>
-                    <input id="Password" type="password" name="passwd">
+                    <input id="Password" type="password" name="passwd" required>
                     <?php
                     if (isset($_GET['id']) &&  $_GET['id'] == 'fail')
                     {

@@ -23,7 +23,8 @@ CREATE TABLE evenement (
                titre varchar(32) NOT NULL default 'Sans titre',
                dateEvenement date,
                 lieu varchar(32),
-               dureeEvenement int,
+                   heure_debut int,
+                   heure_fin int,
                 description varchar(64),
                
                primary key(id_evenement, id_users)

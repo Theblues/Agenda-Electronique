@@ -12,7 +12,7 @@ function validationPrenom($prenom)
     if (strlen($prenom) < 3 || strlen($prenom) > 32)
         return false;
     
-    return true;
+    return estMot($prenom);
 }
 
 function validationNom($nom)
@@ -20,7 +20,7 @@ function validationNom($nom)
     if (strlen($nom) < 3 || strlen($nom) > 32)
         return false;
     
-    return true;
+    return estMot($nom);
 }
 
 function validationPassword($password)
@@ -50,23 +50,32 @@ function moisValide($mois)
 }
 function anneeValide($annee)
 {
-    if (strlen($annee) != 4)
-        return false;
-    return true;
+    return strlen($annee) != 4;
 }
 
-function dureeValide($duree)
+function heureValide($heure)
 {
-    if (preg_match('[0-9]', $duree))
-            return true; 
-   return false;
+    if (strlen($heure) < 1 || strlen($heure) > 2)
+        return  false;
+    
+   return estNombre($heure);
 }
 
 function lieuValide($lieu)
 {
-    if (preg_match('[a-zA-Z]', $lieu))
-        return true;
-    return false;
+     if (strlen($jour) < 4)
+        return false;
+     
+    return estMot($lieu);
 }
 
+function estMot($mot)
+{
+    return preg_match('/^[a-zA-Z]*$/', $mot);
+}
+
+function estNombre($nombre)
+{
+    preg_match('/^[0-9][0-9]$/', $nombre);
+}
 ?>

@@ -340,7 +340,10 @@ table
 }
 
 .formulaire input[type=text],
-.formulaire input[type=password]
+.formulaire input[type=password],
+.formulaire input[type=date],
+.formulaire input[type=time],
+.formulaire input[type=email]
 {
     width: 100%;
     height: 32px;
@@ -354,6 +357,11 @@ table
     height: 32px;
     font-size: 13px;
     background: green;
+}
+
+.formulaire input[type=checkbox]
+{
+    margin: 10px 0 auto;
 }
 
 .formulaire h2
@@ -909,42 +917,42 @@ table.mois
 /**         CONTACT.PHP             **/
 /*******************************/
 
-.listeContact 
+.listeContact, .recherche_personne
 {
     margin: 10px 0 auto;
 }
 
-table.listeContact
+table.listeContact, table.recherche_personne
 {
     font-size: 19px;
     margin: 20px 0 50px -200px;
     font-family: Arial-black;
 }
 
-.listeContact td.caract
+.listeContact th, .recherche_personne th
 {
     color: #A64A2E;
 }
 
-.listeContact td
+.listeContact td, .recherche_personne td
 {
     width: 200px;
     height: 27px;
     border: ridge 2px #CC6C2A;
 }
 
-.listeContact a
+.listeContact a, .recherche_personne a
 {
     text-decoration: none;
     color:#000;
 }
 
-.listeContact a:visited, .listeContact a:link
+.listeContact a:visited, .listeContact a:link, .recherche_personne a:visited
 {
     color: #00BBC1;
 }
 
-.listeContact a:hover
+.listeContact a:hover, .recherche_personne a:hover
 {
     text-decoration: underline;
 }

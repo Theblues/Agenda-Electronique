@@ -9,8 +9,8 @@ function connectionDB()
     try
     {
         $pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
-        //$db = new PDO('mysql:host=localhost;dbname=CPL', 'root', '', $pdo_options);
-        $db = new PDO('pgsql:host=woody;dbname=le100700', 'le100700', 'CPL', $pdo_options);
+        $db = new PDO('mysql:host=localhost;dbname=CPL', 'root', '', $pdo_options);
+        //$db = new PDO('pgsql:host=woody;dbname=le100700', 'le100700', 'CPL', $pdo_options);
     }
     catch (Exception $e)
     {
@@ -185,12 +185,12 @@ function evenementValide($id_user, $date, $titre)
     return true;
 }
 
-function ajouterEvenement($id_user, $date, $titre, $lieu, $duree, $description)
+function ajouterEvenement($id_user, $date, $titre, $lieu, $heure_debut, $heure_fin, $description)
 {
     $db = connectionDB();
     
-    $request = $db->prepare('INSERT INTO evenement(id_users, titre, dateEvenement, lieu, dureeEvenement, description) VALUES (:id_users, :titre, :date, :lieu, :duree, :description)');
-    $request->execute(array(':id_users' => $id_user, ':titre' => $titre, ':date' => $date, ':lieu' => $lieu, ':duree' => $duree, 'description' => $description));
+    $request = $db->prepare('INSERT INTO evenement(id_users, titre, dateEvenement, lieu, heure_debut, heure_fin, description) VALUES (:id_users, :titre, :date, :lieu, :heure_debut, :heure_fin, :description)');
+    $request->execute(array(':id_users' => $id_user, ':titre' => $titre, ':date' => $date, ':lieu' => $lieu, ':heure_debut' => $heure_debut, 'heure_fin' => $heure_fin, ':description' => $description));
 }
 
 function getEvenementUsers($id_user)
