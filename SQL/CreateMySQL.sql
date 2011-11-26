@@ -11,7 +11,7 @@ CREATE TABLE accounts_access (
                 gmlevel TINYINT(3)  unsigned
                 );
 
-CREATE TABLE utilisateurscontact (
+CREATE TABLE contact (
                 id_users int(11) unsigned NOT NULL,
                 id_contact int(11) unsigned NOT NULL,
                 primary key(id_users,id_contact)

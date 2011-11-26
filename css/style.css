@@ -208,7 +208,8 @@ html, body {
 }
 
 .box-connexion input[type=text],
-.box-connexion input[type=password]
+.box-connexion input[type=password],
+.box-connexion input[type=email]
 {
     width: 100%;
     height: 32px;
@@ -221,8 +222,6 @@ html, body {
     font-weight: bold;
     margin: 0 0 .5em;
     display: block;
-    -webkit-user-select: none;
-    -moz-user-select: none;
 }
 
 .box-connexion input[type=submit]

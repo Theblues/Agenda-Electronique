@@ -124,7 +124,7 @@ userbox();
                         echo "<div class='texteEvenement'><p>Liste des évenements de $nom_user $prenom_user</p> </div>";
                     $ancienneDate = 0;
                     $listeEnvenement = getEvenementUsers($id_user);
-                    $nbEnvenement = getNombreEvenementUsers($id_user);
+                    $nbEnvenement = sizeof($listeEnvenement);
                     if ($nbEnvenement == 0)
                     {
                         if ($is_vous == true)
@@ -147,12 +147,14 @@ userbox();
                                     $id_evenement = $val;
                                 if ($att == 'titre')
                                     $titre = $val;
-                                if ($att == 'dateevenement')
+                                if (strtoupper($att) == strtoupper('dateevenement'))
                                     $date = $val;
                                 if ($att == 'lieu')
                                     $lieu = $val;
-                                if ($att == 'dureevenement')
-                                    $dureeEvenement = $val;
+                                if ($att == 'heure_debut')
+                                    $heure_debut = $val;
+                                 if ($att == 'heure_fin')
+                                    $heure_fin = $val;
                                 if ($att == 'description')
                                     $description = $val;
                             }
@@ -172,12 +174,10 @@ userbox();
                                 echo "<li class='dateEvenement'>Evenement de $date</li><ul>";
 
                             echo "<li class='titreEvenement'><span style='color:red;'>Titre</span> : $titre";
-                            if (isset($dureeEvenement))
-                                echo "($dureeEvenement min)";
+                            if (isset($heure_debut))
+                                echo "($heure_debut" . "h-$heure_fin" . ")";
                             if ($is_vous == true)
                                 echo "<span class='croix'><a href='supprimerEvenement.php?id_evenement=$id_evenement'><img class=\"a-logo\" src=\"images/delete.gif\"></a></span>";
-                            else
-                                echo "<span class='croix'><a href='supprimerEvenement.php?id_evenement=$id_evenement&nom=$nom_user&prenom=$prenom_user'><img class=\"a-logo\" src=\"images/delete.gif\"></a></span>";
                             echo "</li>";
                             if (isset($lieu))
                                 echo "<li class='attributEvenement'><span style='color:#FFAB48;'>Lieu</span> : $lieu</li>";

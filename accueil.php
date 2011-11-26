@@ -15,7 +15,7 @@
             <form method="post" action='connexion.php'>
                 <label>
                     <strong class="email-label"> Email </strong>
-                    <input id="Email" type="text" value="" name="email" required>
+                    <input id="Email" type="email" value="" name="email" required>
                 </label>
                 <label>
                     <strong class="password-label"> Mot de passe</strong>

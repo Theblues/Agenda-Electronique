@@ -19,7 +19,7 @@ function insererImage()
     $jour = Date('d');
     $mois = Date('m');
     $annee = Date("Y");
-    echo "<a class=\"lien-agenda\" href=\"index.php?id=mois&jours=$jour&mois=$mois&annee=$annee\"><img class=\"a-logo\" src=\"images/agenda_text.gif\"></a>";
+    echo "<a class=\"lien-agenda\" href=\"index.php?id=planning\"><img class=\"a-logo\" src=\"images/agenda_text.gif\"></a>";
 
 }
 
@@ -65,6 +65,16 @@ function redirect($url)
 {
     header("Location: $url");
     exit();
+}
+
+function modif_int($int)
+{
+    $int = intval($int);
+    if ($int < 10 && $int != 0)
+    {
+        $int = '0' . $int;
+    }
+    return $int;
 }
 
 function div_special($texte)

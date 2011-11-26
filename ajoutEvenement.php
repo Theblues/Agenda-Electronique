@@ -6,10 +6,14 @@ include 'interactionDB.inc.php';
 include 'validation.inc.php';
 
 if (!$_SESSION)
-	redirect("index.php");
+    redirect("index.php");
 
 $jour = htmlspecialchars($_GET['jour']);
+$jour = modif_int($jour);
+
 $moisNum = htmlspecialchars($_GET['mois']);
+$moisNum = modif_int($moisNum);
+
 $annee = htmlspecialchars($_GET['annee']);
 
 head();
@@ -55,14 +59,14 @@ userbox();
                         <td><input type="checkbox" name="lieu_checkbox" id="lieu_checkbox" /></td>
                     <tr id="tr_lieu_event" style="display:none;">
                         <td> Le lieu de l'évenement : </td>
-                        <td> <input id="lieuEvt" type="text" value="" name="lieuEvenement"></td>
+                        <td> <input id="lieu_event" type="text" value="" name="lieuEvenement"></td>
                     </tr>
                     <tr>
                         <td>Ajouter une description </td>
                         <td><input type="checkbox" name="desc_checkbox" id="desc_checkbox" /></td>
                     <tr id="tr_desc_event" style="display:none;">
                         <td> Description de l'évenement : </td>
-                        <td> <input id="descriptionEvt" type="text" value="" name="descriptionEvenement"></td>
+                        <td> <input id="desc_event" type="text" value="" name="descriptionEvenement"></td>
                     </tr>
                     <tr>
                         <td><input id="AjouterEvt" type="submit" value="Ajouter l'évenement" name="ajouter"></td>
@@ -97,14 +101,35 @@ userbox();
             
             // affiche le tr pour le lieu
             if ($('#lieu_checkbox').attr('checked'))
-                $('#tr_lieu_event').show('slow');
+                {
+                    $('#tr_lieu_event').show('slow');
+                    $("#lieu_event").attr({
+                        required : true
+                    });
+                }  
             else
-                $('#tr_lieu_event').hide('slow');
+                {
+                    $('#tr_lieu_event').hide('slow');
+                    $("#lieu_event").attr({
+                        required : false
+                    });
+                }
             //afiche le tr pour la description
             if ($('#desc_checkbox').attr('checked'))
-                $('#tr_desc_event').show('slow');
+                {
+                    $('#tr_desc_event').show('slow');
+                    $("#desc_event").attr({
+                        required : true
+                    });
+                }
             else
-                $('#tr_desc_event').hide('slow');
+                {
+                     $('#tr_desc_event').hide('slow');
+                     $("#desc_event").attr({
+                        required : false
+                    });
+                }
+               
         });
 
 </script>
@@ -118,11 +143,30 @@ $action = (isset($_GET['action'])) ? $_GET['action'] : '';
 if ($action == "ajoutEvent")
 {
         $date = htmlspecialchars($_POST["date_event"]);
-        $delimiter  = $date[2];
+        
+        $num_delimiter = strpos($date, '/');
+        if ($num_delimiter === false)
+        {
+            $num_delimiter = strpos($date, '-');
+            if ($num_delimiter === false)
+            {
+                $num_delimiter = strpos($date, '.');
+                if ($num_delimiter === false)
+                {
+                    echo "<div class='special_erreur'> Veuillez mettre / - ou . dans la date</div>";
+                    footer();
+                    exit();
+                }
+            }
+        }
+        
+        $delimiter = $date[$num_delimiter];
         $date_couper = explode($delimiter, $date);
         $jourF = $date_couper[0];
+        $jourF = modif_int($jourF);
         $moisF = $date_couper[1];
-        $anneeF = $date_couper[3];
+        $moisF = modif_int($moisF);
+        $anneeF = $date_couper[2];
         $titreF = $_POST["titreEvenement"];
         $date = $anneeF . '-' . $moisF . '-' . $jourF;
 
@@ -146,19 +190,16 @@ if ($action == "ajoutEvent")
                             $lieu = $_POST['lieuEvenement'];
                         if (isset($_POST['descriptionEvenement']) && !empty($_POST['descriptionEvenement']))
                             $description = $_POST['descriptionEvenement'];
-
-
                         
-                        if (!dureeValide($heure_debut))
+                        if ($heure_debut != NULL && !heureValide($heure_debut))
                             $heure_debut = NULL;
-                        if (!dureeValide($heure_fin))
+                        if ($heure_fin != NULL && !heureValide($heure_fin))
                             $heure_fin = NULL;
-                        if (!lieuValide($lieu))
+                        if ($lieu != NULL && !lieuValide($lieu))
                             $lieu = NULL;
                         
-                        // pour debugger
-                        echo "<br /> <br />";
-                        
+                        $heure_debut = modif_int($heure_debut);
+                        $heure_fin = modif_int($heure_fin);
                         ajouterEvenement($id_users, $date, $titreF, $lieu, $heure_debut, $heure_fin, $description);
                         echo "<div class='special_marche'> Evénement ajouté </div>";
                     }

@@ -1,6 +1,7 @@
 <?php
 userbox();
 
+$id_user = $_SESSION['id'];
 $jour = Date('d');
 $mois = Date('m');
 $annee = Date("Y");

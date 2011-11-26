@@ -50,7 +50,7 @@ function moisValide($mois)
 }
 function anneeValide($annee)
 {
-    return strlen($annee) != 4;
+    return strlen($annee) == 4;
 }
 
 function heureValide($heure)
@@ -71,11 +71,11 @@ function lieuValide($lieu)
 
 function estMot($mot)
 {
-    return preg_match('/^[a-zA-Z]*$/', $mot);
+    return preg_match('/^[a-zA-Z]+$/', $mot);
 }
 
 function estNombre($nombre)
 {
-    preg_match('/^[0-9][0-9]$/', $nombre);
+    return preg_match('/^[0-9]+$/', $nombre);
 }
 ?>

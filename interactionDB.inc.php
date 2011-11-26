@@ -163,7 +163,7 @@ function modifierCompte($entree, $valeur, $id)
 function listeEvenementJour($id_user, $date)
 {
     $db = connectionDB();
-    $request = $db->prepare('SELECT titre, lieu, dureeEvenement, description FROM evenement WHERE id_users = :id AND dateEvenement = :dateEvenement');
+    $request = $db->prepare('SELECT titre, lieu, heure_debut, heure_fin, description FROM evenement WHERE id_users = :id AND dateEvenement = :dateEvenement');
    $request->execute(array(':id' => $id_user, ':dateEvenement' => $date));
 
    $resultat = $request->fetchAll();
@@ -197,7 +197,7 @@ function getEvenementUsers($id_user)
 {
     $db = connectionDB();
     
-    $request = $db->prepare('SELECT id_evenement, titre, dateEvenement, lieu, dureeEvenement, description
+    $request = $db->prepare('SELECT id_evenement, titre, dateEvenement, lieu, heure_debut, heure_fin, description
                                             FROM evenement
                                             WHERE id_users = :id_users
                                             ORDER BY dateEvenement');
@@ -205,18 +205,6 @@ function getEvenementUsers($id_user)
     $res = $request->fetchAll(PDO::FETCH_ASSOC);
 
     return $res;
-}
-
-function getNombreEvenementUsers($id_user)
-{
-    $db = connectionDB();
-    
-    $request = $db->prepare('SELECT count(*) AS i FROM evenement
-                                              WHERE id_users = :id_users');
-    $request->execute(array(':id_users' => $id_user));
-    $res = $request->fetch(PDO::FETCH_ASSOC);
-    
-    return $res['i'];
 }
 
 function supprimerEvenement($id_evenement)
@@ -234,6 +222,7 @@ function getContact($id_user)
     $result = $request->fetchAll();
 
     $i = 0;
+    $personne = null;
     foreach ($result AS $attribut => $valeur)
     {
         foreach ($valeur as $att => $val)
@@ -241,7 +230,7 @@ function getContact($id_user)
             if ($att == 'id_contact')
             {
                 $id_contact = $val;
-                $request = $db->prepare('SELECT nom, prenom,  email FROM accounts where id = :id_users');
+                $request = $db->prepare('SELECT id, nom, prenom,  email FROM accounts where id = :id_users');
                 $request->execute(array(':id_users' =>$id_contact));
                 $personne[$i] = $request->fetch(PDO::FETCH_ASSOC);
             }
@@ -251,7 +240,7 @@ function getContact($id_user)
     return $personne;
 }
 
-function recherche_db($recherche)
+function recherche_db_1($recherche)
 {
     $db = connectionDB();
     
@@ -259,6 +248,20 @@ function recherche_db($recherche)
     $request = $db->prepare("SELECT id, nom, prenom, email FROM accounts 
                                                 WHERE (UPPER(nom) LIKE UPPER(:recherche) OR UPPER(prenom) LIKE UPPER(:recherche))");
     $request->execute(array (':recherche' => $recherche));
+    $result = $request->fetchAll(PDO::FETCH_ASSOC);
+    
+    return $result;
+}
+
+function recherche_db_2($recherche1, $recherch2)
+{
+    $db = connectionDB();
+    
+    $recherche = "%$recherche%";
+    $request = $db->prepare("SELECT id, nom, prenom, email FROM accounts 
+                                                WHERE (UPPER(nom) LIKE UPPER(:recherche1) OR UPPER(prenom) LIKE UPPER(:recherche1)) 
+                                                        OR (UPPER(nom) LIKE UPPER(:recherche2) OR UPPER(prenom) LIKE UPPER(:recherche2))");
+    $request->execute(array (':recherche1' => $recherche1, ':recherche2' => $recherch2));
     $result = $request->fetchAll(PDO::FETCH_ASSOC);
     
     return $result;

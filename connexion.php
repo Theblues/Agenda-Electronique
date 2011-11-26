@@ -18,11 +18,7 @@ if ($result)
     foreach ($resultInfo AS $attribut => $valeur)
         $_SESSION[$attribut] = $valeur;
 
-    $jour = Date('d');
-    $mois = Date('m');
-    $annee = Date("Y");
-
-    redirect("index.php?id=mois&jours=$jour&mois=$mois&annee=$annee");
+    redirect("index.php?id=planning");
 }
 else
     redirect("index.php?id=fail");

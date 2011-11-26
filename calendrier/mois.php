@@ -5,8 +5,10 @@ include "string.inc.php";
 $id_users = $_SESSION['id'];
 
 $jour = $_GET['jours'];
+$jour = modif_int($jour);
 $moisNum = $_GET['mois'];
-$moisNom = monthNumToName($moisNum);
+$moisNum = modif_int($moisNum);
+$moisNom = monthNumToName(intval($moisNum));
 $annee = $_GET['annee'];
 
 $periode = $annee . '-' . $moisNum . '-' . $jour;
@@ -98,6 +100,10 @@ echo '</tr></table>';
         {
             mois = '0' + mois;
         }
+        if (jour < 10 && jour != 0)
+        {
+            jour = '0' + jour;
+        }
         document.location="selection.php?temps=mois&jours=" + jour + "&mois=" + mois + "&annee=" + annee;
     }
 </script>
@@ -121,18 +127,17 @@ echo '</tr></table>';
                 echo '<li>Aucun évenement pour ce jour.</li>';
             echo '<li>' . $valeur['titre'];
 
-            if (isset($valeur['dureeEvenement']))
-                echo " (" . $valeur['dureeEvenement'] . "min)";
+            if (isset($valeur['heure_debut']))
+                echo " (" . $valeur['heure_debut'] . "h-" . $valeur['heure_fin'] . ")";
             echo '</li>';
             if (isset($valeur['description']) || isset($valeur['lieu']))
             {
-                echo "<ul><li>";
-                if (isset($valeur['description']) && isset($valeur['lieu']))
-                    echo 'description : ' . $listeEvenement['description'] . '</li><li> lieu : ' . $valeur['lieu'] . '</li></ul>';
-                else if (isset($valeur['description']) && !isset($valeur['lieu']))
-                    echo 'description : ' . $valeur['description'] . '</li></ul>';
+                echo "<ul>";
+                if (isset($valeur['description']) && !isset($valeur['lieu']))
+                    echo '<li>description : ' . $valeur['description'] . '</li>';
                 else if (!isset($valeur['description']) && isset($valeur['lieu']))
-                    echo 'lieu : ' . $valeur['lieu'] . '</li></ul>';
+                    echo '<li>lieu : ' . $valeur['lieu'] . '</li>';
+                echo '</ul>';
             }
         }
     }

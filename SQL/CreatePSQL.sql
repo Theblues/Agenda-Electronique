@@ -5,8 +5,6 @@ CREATE TABLE accounts_access (
                 gmlevel int
                 );
 
-CREATE TABLE utilisateurscontact (                id_users int primary key,                id_contact  int                );
+CREATE TABLE contact (id_users int primary key, id_contact  int, primary key(id_users,id_contact));
 		
-CREATE TABLE evenementStruct (               id_evenement serial ,               id_users int,               titre varchar(32),               dateEvenement date,    primary key(id_evenement, id_users)            );
-               
-CREATE TABLE evenementDetail (            id_evenement serial primary key,            lieu varchar(32),            dureeEvenement int,            description varchar(64)            );
+CREATE TABLE evenement (id_evenement serial, id_users int, titre varchar(32), dateEvenement date, lieu varchar(32), heure_debut int, heure_fin int, description varchar(255), primary key(id_evenement, id_users));

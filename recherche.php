@@ -20,9 +20,16 @@ else
 function liste_recheche()
 {
     $search = $_GET['search'];
-    
-    $liste_personne = recherche_db($search);
-    
+    if (strpos($search, " ") !== false)
+    {
+        $search_couper = explode(" ", $search);
+        $premier_search = $search_couper[0];
+        $deuxieme_search = $search_couper[1];
+        
+        $liste_personne = recherche_db_2($premier_search, $deuxieme_search);
+    }
+    else
+        $liste_personne = recherche_db_1($search);
     
     echo '<div class="main content">
                     <div class="header-main">
